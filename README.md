@@ -1,150 +1,101 @@
 # 📱 HabitTracker – SwiftUI App
 
-**HabitTracker** is a SwiftUI application that allows users to create, track, and visualize their daily habits.  
-All habits are saved automatically using **UserDefaults**, ensuring your data persists even after closing the app.
+> **Track your daily habits seamlessly with data persistence.**
+
+**HabitTracker** is a robust SwiftUI application designed to help users create, track, and visualize their daily habits. All data is automatically saved using **UserDefaults**, ensuring that your progress persists even after closing the application.
 
 ---
 
 ## 🚀 Features
 
-- 📌 Create custom habits with a name and description  
-- ✔️ Mark habits as completed using a custom checkbox  
-- 🔄 Automatic data persistence using UserDefaults  
-- 📊 Habit statistics, including:  
-  - Total completion count  
-  - Daily completion status  
-- 🗑️ Delete habits by swiping  
-- 🔍 Detailed habit view  
-- ➕ Add +1 to the habit count  
-- 🎨 Modern and clean UI design  
-- 📂 Navigation persistence with `NavigationPath`  
+This app includes a comprehensive set of features to manage habits effectively:
+
+* **📌 Create Habits:** Add custom habits with a unique name and description.
+* **✔️ Quick Actions:** Mark habits as completed instantly using a custom checkbox component.
+* **🔄 Data Persistence:** Automatic saving and loading using `UserDefaults` with Codable support.
+* **📊 Statistics & Insights:**
+    * View total completion counts.
+    * Track daily completion status.
+* **🔍 Detail View:** Explore specific details for each habit.
+* **➕ Increment Counter:** Manually add +1 to the habit completion count.
+* **🗑️ User Friendly:** Delete habits easily with a "swipe-to-delete" gesture.
+* **📂 Smart Navigation:** State restoration and navigation persistence using `NavigationPath`.
+* **🎨 UI/UX:** Modern, clean, and native SwiftUI design.
+
+---
+
+## 🛠️ Technologies Used
+
+![Swift](https://img.shields.io/badge/Swift-5.0-orange?style=flat-square&logo=swift)
+![SwiftUI](https://img.shields.io/badge/SwiftUI-Framework-blue?style=flat-square&logo=swift)
+![Xcode](https://img.shields.io/badge/Xcode-15%2B-157CFC?style=flat-square&logo=Xcode)
+
+-   **Language:** Swift 5
+-   **Framework:** SwiftUI
+-   **Storage:** UserDefaults + Codable extensions
+-   **Navigation:** NavigationStack + NavigationPath
+-   **Architecture:** Lightweight MVVM (Model-View-ViewModel)
+
+---
+
+## 📸 Screenshots
+
+| Habit List | Habit Details |
+|:---:|:---:|
+| ![Habit List](Images/habits_list.png) | ![Habit Detail](Images/habit_detail.png) |
+| *Main view with swipe actions* | *Detailed view with counters* |
 
 ---
 
 ## 🧱 Project Structure
 
-The app is organized with models, views, and utilities for clarity and maintainability.
-
----
+The application follows a clean architecture, separating logic into Models, Persistence layers, and Views.
 
 ### 📌 Model
+* **`Habit.swift`**
+    * Defines the core data structure.
+    * Properties: `id` (UUID), `name`, `description`, `isDone`, `completionCount`.
+    * Conforms to: `Codable`, `Identifiable`, `Hashable`, `Equatable`.
 
-### `Habit.swift`
+### 💾 Persistence Layer
+* **`UserDefaultsSave.swift`**
+    * Extends `UserDefaults` to support custom objects.
+    * Functions: `setCodable(_:forKey:)` and `codableObject(_:forKey:)`.
+* **`PathStore.swift`**
+    * Manages navigation state persistence.
+    * Uses `NavigationPath.CodableRepresentation` to save the user's current screen across sessions.
 
-Defines the Habit model with:
-
-- `id`  
-- `name`  
-- `description`  
-- `isDone`  
-- `completionCount`  
-
-Implements:
-
-- `Codable`  
-- `Identifiable`  
-- `Hashable`  
-- `Equatable`  
-
----
-
-### 💾 Persistence
-
-### `UserDefaultsSave.swift`
-
-Adds Codable support to UserDefaults through:
-
-- `setCodable(_:forKey:)`
-- `codableObject(_:forKey:)`
-
-Allows simple storage and retrieval of habit data.
-
----
-
-### 🧭 Navigation Persistence
-
-### `PathStore.swift`
-
-Stores and restores navigation using:
-
-- `NavigationPath.CodableRepresentation`
-
-Ensures the app remembers the navigation state across sessions.
-
----
-
-### 📋 Main List Logic
-
-### `ContentView.swift`
-
-Includes:
-
-- Habit list display  
-- Custom checkbox logic  
-- Add button  
-- Swipe-to-delete  
-- Background styling  
-- `Habits` observable class integration  
-
----
-
-### 🆕 Add New Habit
-
-### `AddHabitView.swift`
-
-Allows users to:
-
-- Enter a habit name  
-- Add a description  
-- Optionally mark it as completed  
-- Save the habit  
-
----
-
-### 📊 Habit Details
-
-### `DetailHabitView.swift`
-
-Shows:
-
-- Habit name  
-- Habit description  
-- Daily status  
-- Total completion count  
-- Button to increment habit count  
-
----
-
-### ✔️ Custom Checkbox Component
-
-### `CheckBoxView.swift`
-
-Reusable checkbox using:
-
-```swift
-Image(systemName: checked ? "checkmark.square.fill" : "square")
-
-## 🛠️ Technologies Used
-
-- Swift 5  
-- SwiftUI  
-- UserDefaults + Codable  
-- NavigationStack + NavigationPath  
-- Lightweight MVVM  
-- Xcode 15+  
-
----
-
-## 📸 Screenshots (Optional)
-
-![Habit List](Images/habits_list.png)  
-![Habit Detail](Images/habit_detail.png)
+### 📱 User Interface (Views)
+* **`ContentView.swift`**
+    * The main hub of the app. Displays the list, handles the "Add" button, swipe-to-delete logic, and background styling.
+* **`AddHabitView.swift`**
+    * Form to input habit name and description. Includes validation and save logic.
+* **`DetailHabitView.swift`**
+    * Displays deep insights: Description, status, and a button to increment the completion count.
+* **`CheckBoxView.swift`**
+    * A reusable, custom UI component.
+    * Logic: `Image(systemName: checked ? "checkmark.square.fill" : "square")`.
 
 ---
 
 ## 🧩 Installation & Setup
 
-Clone the repository:
+To run this project locally on your machine:
 
-```bash
-git clone https://github.com/Peralta24/HabitTracker.git
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/Peralta24/HabitTracker.git](https://github.com/Peralta24/HabitTracker.git)
+    ```
+
+2.  **Open in Xcode:**
+    Navigate to the project folder and open `HabitTracker.xcodeproj`.
+
+3.  **Run the App:**
+    Select your target simulator (e.g., iPhone 15 Pro) and press **Cmd + R**.
+
+---
+
+## 📝 Notes
+
+* The project uses **MVVM principles** to keep the logic separated from the UI.
+* **NavigationPersistence** is a key feature, ensuring the user returns to the exact same screen if the app is terminated by the system.
